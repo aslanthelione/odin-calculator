@@ -1,0 +1,19 @@
+.calculator {
+    display: flex;
+    flex-wrap: wrap;
+    width: 320px;
+    margin: 0 auto;
+}
+
+.calculator button {
+    box-sizing: border-box;
+    width: 25%;
+    height: 80px;
+    font-size: 1.25rem;
+    border: 1px solid #999;
+    font-weight: bold;
+}
+
+.calculator button.equals {
+    width: 50%;
+}
