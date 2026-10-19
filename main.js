@@ -56,7 +56,7 @@ function handleDigit(d) {
     console.log(`handleDigit(${d})`);
 
     if (showingAns) {
-        left = +d;
+        left = d.toString();
         showingAns = false;
     } else {
         if (op) {
