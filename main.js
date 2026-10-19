@@ -81,6 +81,14 @@ function handleOperator(o) {
     if (right) {
         handleEquals();
         handleOperator(o);
+    } else if (o === "-") {
+        if (!left) {
+            leftNeg = !leftNeg;
+        } else if (op && op !== "-") {
+            rightNeg = !rightNeg;
+        } else {
+            op = o;
+        }
     } else {
         op = o;
     }
