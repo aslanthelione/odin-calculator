@@ -46,7 +46,11 @@ document.addEventListener("keydown", (e) => {
     } else if (key.toLowerCase() === "n") {
         handleNegate();
     } else if (key === "Backspace") {
-        clearLast();
+        if (e.getModifierState("Control")) {
+            clearAll();
+        } else {
+            clearLast();
+        }
     } else if (key === "Delete" || key.toLowerCase() === "c") {
         clearAll();
     }
