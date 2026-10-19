@@ -53,8 +53,6 @@ document.addEventListener("keydown", (e) => {
 });
 
 function handleDigit(d) {
-    console.log(`handleDigit(${d})`);
-
     if (showingAns) {
         left = d.toString();
         showingAns = false;
@@ -74,13 +72,13 @@ function handleDigit(d) {
 }
 
 function handleOperator(o) {
-    console.log(`handleOperator(${o})`);
-
     showingAns = false;
 
     if (right) {
-        handleEquals();
-        handleOperator(o);
+        if (!(op === "/" && +right === 0)) {
+            handleEquals();
+            handleOperator(o);
+        }
     } else if (o === "-") {
         if (!left) {
             leftNeg = !leftNeg;
@@ -97,8 +95,6 @@ function handleOperator(o) {
 }
 
 function handleDecimal() {
-    console.log(`handleDecimal()`);
-
     showingAns = false;
 
     if (op) {
@@ -119,14 +115,16 @@ function handleDecimal() {
 }
 
 function handleEquals() {
-    console.log(`handleEquals()`);
-
     if (right) {
         let ans = 0;
         let x = +left;
         if (leftNeg) x = -x;
         let y = +right;
         if (rightNeg) y = -y;
+
+        if (y === 0 && op === "/") {
+            return;
+        }
 
         switch (op) {
             case "+": ans = x + y; break;
@@ -145,13 +143,11 @@ function handleEquals() {
         updateDisplay();
     } else if (!op) {
         showingAns = true;
-        // updateDisplay();
+        updateDisplay();
     }
 }
 
 function handleNegate() {
-    console.log(`handleNegate()`);
-
     showingAns = false;
 
     if (op) {
@@ -164,8 +160,6 @@ function handleNegate() {
 }
 
 function clearLast() {
-    console.log(`clearLast()`);
-
     if (right) {
         right = right.slice(0, -1);
 
@@ -183,8 +177,6 @@ function clearLast() {
 }
 
 function clearAll() {
-    console.log(`clearAll()`);
-
     leftNeg = "";
     left = "";
     op = "";
